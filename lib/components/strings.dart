@@ -1,5 +1,5 @@
-class AppStrings{
-  static const String appbarTitle = 'باشگاه ورزشی سید';
+class AppStrings {
+  static const String appbarTitle = "appbarTitle";
   static const String ok = 'اوکی';
   static const String activeUser = 'کاربران فعال';
   static const String NotactiveUser = 'کاربران غیرفعال';
