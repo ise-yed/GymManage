@@ -21,9 +21,10 @@ class _RootScreenState extends State<RootScreen> {
           children: [
             Text(
               AppStrings.appbarTitle,
-              style: textTheme.bodyLarge,
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
             ),
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
                   onPressed: () {
@@ -37,15 +38,42 @@ class _RootScreenState extends State<RootScreen> {
                     isDarkMode.value = !isDarkMode.value;
                     isDarkModeState.setBool('darkmode', isDarkMode.value);
                   },
-                  icon: Icon(isDarkMode.value != false
-                      ? Icons.dark_mode_outlined
-                      : Icons.dark_mode_rounded),
+                  icon: Icon(
+                    isDarkMode.value != false
+                        ? Icons.dark_mode_outlined
+                        : Icons.dark_mode_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                IconButton(
+                  iconSize: 24,
+                  onPressed: () {
+                    snackbarCustom(
+                        context,
+                        isDarkMode.value == false
+                            ? AppStrings.goEnglishMode
+                            : AppStrings.goPersianMode,
+                        textTheme,
+                        ColorState.green);
+                    isDarkMode.value = !isDarkMode.value;
+                    isDarkModeState.setBool('darkmode', isDarkMode.value);
+                  },
+                  icon: Icon(
+                    isDarkMode.value != false
+                        ? Icons.language_rounded
+                        : Icons.language_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),
           ],
         ),
       ),
+   
+   
+   
+   
     );
   }
 }

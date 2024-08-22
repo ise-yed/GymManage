@@ -25,7 +25,7 @@ snackbarCustom(BuildContext context, String title, TextTheme textTheme,
       duration: Duration(seconds: 1),
       content: Text(
         title,
-        style: textTheme.bodyLarge,
+        style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
       ),
       action: SnackBarAction(
         label: AppStrings.ok,
