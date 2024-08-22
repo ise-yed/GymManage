@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
 import 'package:gym_managment/utils/snackbar.dart';
@@ -13,9 +12,30 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
+  var s = 's';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   int userState = 0;
   @override
   Widget build(BuildContext context) {
+    print(s);
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
     return Scaffold(
@@ -65,9 +85,9 @@ class _RootScreenState extends State<RootScreen> {
                     // isDarkMode.value = !isDarkMode.value;
                     // isDarkModeState.setBool('darkmode', isDarkMode.value);
 
-                    context.setLocale(context.locale == Locale('fa', 'IR')
-                        ? Locale('en', 'US')
-                        : Locale('fa', 'IR'));
+                    context.setLocale(context.locale == const Locale('fa', 'IR')
+                        ? const Locale('en', 'US')
+                        : const Locale('fa', 'IR'));
                   },
                   icon: Icon(
                     isDarkMode.value != false
@@ -88,13 +108,13 @@ class _RootScreenState extends State<RootScreen> {
             AnimatedAlign(
               curve: Curves.linearToEaseOut,
               alignment: userState == 0
-                  ? (context.locale == Locale('en', 'US')
+                  ? (context.locale == const Locale('en', 'US')
                       ? Alignment.centerLeft
                       : Alignment.centerRight)
-                  : (context.locale == Locale('en', 'US')
+                  : (context.locale == const Locale('en', 'US')
                       ? Alignment.centerRight
                       : Alignment.centerLeft),
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               child: Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width / 2,
@@ -122,7 +142,7 @@ class _RootScreenState extends State<RootScreen> {
                               ? Colors.grey.shade400
                               : color.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
@@ -156,7 +176,7 @@ class _RootScreenState extends State<RootScreen> {
                               ? Colors.grey.shade400
                               : color.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
