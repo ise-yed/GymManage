@@ -4,8 +4,10 @@ import 'package:gym_managment/data/models/user.dart';
 import 'package:gym_managment/screens/root/root.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+ValueNotifier<bool> isDarkMode = ValueNotifier(false);
 String boxValue = 'gym-data';
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   var box = await Hive.openBox<UserModel>(boxValue);
@@ -16,14 +18,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: lightTheme(),
-      darkTheme: darkTheme(),
-      home: const RootScreen(),
+    return ValueListenableBuilder(
+      valueListenable: isDarkMode,
+      builder: (context, value, child) {
+        return MaterialApp(
+          theme: lightTheme('dana'),
+          darkTheme: darkTheme('dana'),
+          themeMode: value == false ? ThemeMode.light : ThemeMode.dark,
+          home: const RootScreen(),
+        );
+      },
     );
   }
 }
