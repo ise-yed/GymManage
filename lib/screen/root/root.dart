@@ -17,7 +17,7 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
-    return Scaffold(
+    return Scaffold(body: Container(color: Colors.blue,),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,19 +73,19 @@ class _RootScreenState extends State<RootScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 72,
         child: Column(
           children: [
-      
-            AnimatedAlign(curve: Curves.bounceOut,
+            AnimatedAlign(
+              curve: Curves.bounceOut,
               alignment:
                   userState == 0 ? Alignment.centerLeft : Alignment.centerRight,
               duration: Duration(milliseconds: 100),
               child: Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width / 2,
-                color:  color.primary,
+                color: color.primary,
               ),
             ),
             Row(
