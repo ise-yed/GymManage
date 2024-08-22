@@ -12,11 +12,9 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-  var s = 's';
   int userState = 0;
   @override
   Widget build(BuildContext context) {
-    print(s);
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
     return Scaffold(
