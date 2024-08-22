@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
@@ -17,13 +18,16 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
-    return Scaffold(body: Container(color: Colors.blue,),
+    return Scaffold(
+      body: Container(
+        color: Colors.blue,
+      ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              AppStrings.appbarTitle,
+              AppStrings.appbarTitle.tr(),
               style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
             ),
             Row(
@@ -51,15 +55,19 @@ class _RootScreenState extends State<RootScreen> {
                 IconButton(
                   iconSize: 24,
                   onPressed: () {
-                    snackbarCustom(
-                        context,
-                        isDarkMode.value == false
-                            ? AppStrings.goEnglishMode
-                            : AppStrings.goPersianMode,
-                        textTheme,
-                        ColorState.green);
-                    isDarkMode.value = !isDarkMode.value;
-                    isDarkModeState.setBool('darkmode', isDarkMode.value);
+                    // snackbarCustom(
+                    //     context,
+                    //     isDarkMode.value == false
+                    //         ? AppStrings.goEnglishMode
+                    //         : AppStrings.goPersianMode,
+                    //     textTheme,
+                    //     ColorState.green);
+                    // isDarkMode.value = !isDarkMode.value;
+                    // isDarkModeState.setBool('darkmode', isDarkMode.value);
+
+                    context.setLocale(context.locale == Locale('fa', 'IR')
+                        ? Locale('en', 'US')
+                        : Locale('fa', 'IR'));
                   },
                   icon: Icon(
                     isDarkMode.value != false
@@ -78,10 +86,15 @@ class _RootScreenState extends State<RootScreen> {
         child: Column(
           children: [
             AnimatedAlign(
-              curve: Curves.bounceOut,
-              alignment:
-                  userState == 0 ? Alignment.centerLeft : Alignment.centerRight,
-              duration: Duration(milliseconds: 100),
+              curve: Curves.linearToEaseOut,
+              alignment: userState == 0
+                  ? (context.locale == Locale('en', 'US')
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight)
+                  : (context.locale == Locale('en', 'US')
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft),
+              duration: Duration(milliseconds: 500),
               child: Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width / 2,
