@@ -11,9 +11,11 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
+  int userState = 0;
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    var color = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -70,10 +72,101 @@ class _RootScreenState extends State<RootScreen> {
           ],
         ),
       ),
-   
-   
-   
-   
+      bottomNavigationBar: Container(
+        height: 72,
+        color: color.onPrimary,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                  height: 2,
+                  color: userState == 0 ? color.primary : color.onPrimary,
+                )),
+                Expanded(
+                    child: Container(
+                  height: 2,
+                  color: userState == 1 ? color.primary : color.onPrimary,
+                ))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      userState = 0;
+                    });
+                  },
+                  child: SizedBox(
+                    height: 70,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.local_activity_rounded,
+                          color: userState != 0
+                              ? Colors.grey.shade400
+                              : color.primary,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          AppStrings.activeUser,
+                          style: textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: userState != 0
+                                ? Colors.grey.shade400
+                                : color.primary,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )),
+                Expanded(
+                    child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      userState = 1;
+                    });
+                  },
+                  child: SizedBox(
+                    height: 70,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.local_activity_outlined,
+                          color: userState != 1
+                              ? Colors.grey.shade400
+                              : color.primary,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          AppStrings.NotactiveUser,
+                          style: textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: userState != 1
+                                ? Colors.grey.shade400
+                                : color.primary,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
