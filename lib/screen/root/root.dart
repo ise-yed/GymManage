@@ -13,25 +13,6 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   var s = 's';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   int userState = 0;
   @override
   Widget build(BuildContext context) {
