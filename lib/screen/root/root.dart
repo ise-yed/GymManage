@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
 import 'package:gym_managment/utils/snackbar.dart';
@@ -74,22 +75,18 @@ class _RootScreenState extends State<RootScreen> {
       ),
       bottomNavigationBar: Container(
         height: 72,
-        color: color.onPrimary,
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  height: 2,
-                  color: userState == 0 ? color.primary : color.onPrimary,
-                )),
-                Expanded(
-                    child: Container(
-                  height: 2,
-                  color: userState == 1 ? color.primary : color.onPrimary,
-                ))
-              ],
+      
+            AnimatedAlign(curve: Curves.bounceOut,
+              alignment:
+                  userState == 0 ? Alignment.centerLeft : Alignment.centerRight,
+              duration: Duration(milliseconds: 100),
+              child: Container(
+                height: 2,
+                width: MediaQuery.of(context).size.width / 2,
+                color:  color.primary,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

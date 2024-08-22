@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme(String fontFamily) {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.green,
+    bottomNavigationBarTheme:
+        BottomNavigationBarThemeData(backgroundColor: Color(0xFFF5F5F5)),
+    appBarTheme: AppBarTheme(backgroundColor: Color(0xFFF5F5F5)),
+    scaffoldBackgroundColor: Color(0xFFF5F5F5),
     colorScheme: ColorScheme.light(
         primary: Colors.black,
         onPrimary: Colors.white,
@@ -18,8 +21,10 @@ ThemeData lightTheme(String fontFamily) {
 }
 
 ThemeData darkTheme(String fontFamily) {
-  return ThemeData(
-    scaffoldBackgroundColor: Colors.red,
+  return ThemeData(    appBarTheme: AppBarTheme(backgroundColor: Color(0xFF212121)),
+      bottomNavigationBarTheme:
+        BottomNavigationBarThemeData(backgroundColor: Color(0xFF212121)),
+    scaffoldBackgroundColor: Color(0xFF212121),
     colorScheme: ColorScheme.dark(
         primary: Colors.white,
         onPrimary: Colors.black,
