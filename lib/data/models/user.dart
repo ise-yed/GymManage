@@ -9,10 +9,14 @@ class UserModel extends HiveObject {
   String registerDate;
   @HiveField(3)
   String expireDate;
-  // @HiveField(4)
+  @HiveField(4)
+  int id;
   UserModel(
       {required this.expireDate,
       required this.registerDate,
       required this.name,
-      required this.number});
+      required this.number,
+      
+      required this.id
+      });
 }
