@@ -86,10 +86,15 @@ class _RootScreenState extends State<RootScreen> {
         child: Column(
           children: [
             AnimatedAlign(
-              curve: Curves.bounceOut,
-              alignment:
-                  userState == 0 ? Alignment.centerLeft : Alignment.centerRight,
-              duration: Duration(milliseconds: 100),
+              curve: Curves.linearToEaseOut,
+              alignment: userState == 0
+                  ? (context.locale == Locale('en', 'US')
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight)
+                  : (context.locale == Locale('en', 'US')
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft),
+              duration: Duration(milliseconds: 500),
               child: Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width / 2,
