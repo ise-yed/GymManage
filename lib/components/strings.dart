@@ -12,4 +12,5 @@ class AppStrings {
   static const String activeUserCount = "activeUserCount";
   static const String notactiveUserCount = "notactiveUserCount";
   static const String count = "count";
+  
 }

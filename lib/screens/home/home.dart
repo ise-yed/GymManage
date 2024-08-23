@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
+import 'package:gym_managment/data/models/user.dart';
 import 'package:gym_managment/screens/ChangeUser/ChangeUser.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Colors.white),
-                    fillColor: Color.fromARGB(180, 158, 158, 158),
+                    fillColor: Color.fromARGB(170, 158, 158, 158),
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(14))),
@@ -161,7 +162,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
-                    return const ChangeUserScreen();
+                    return  ChangeUserScreen(userData: UserModel(),);
                   },
                 ));
               },
