@@ -12,6 +12,13 @@
   "hintSearchTextField": "ُSearch By Name",
   "activeUserCount": "Active User Count",
   "notactiveUserCount": "Not Active User Count",
-  "count": "Count {count}"
+  "count": "Count {count}",
+  "name": "Name",
+  "phone": "Phone",
+  "registerDate": "Register Date",
+  "expireDate": "Expire Date",
+  "HalfMonth": "15 Days",
+  "oneMonth": "1 Month",
+  "threeMonth": "3 Month"
 
 }

@@ -7,8 +7,18 @@ OutlineInputBorder _buildBorder(Color color) {
   );
 }
 
-ThemeData lightTheme(String fontFamily) {
+ThemeData lightTheme(String fontFamily, Size size) {
   return ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(Colors.white),
+          backgroundColor: MaterialStatePropertyAll(Colors.blueAccent.shade700),
+          fixedSize: MaterialStatePropertyAll(
+            Size(size.width, 45),
+          ),
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(14),
       filled: true,
@@ -37,8 +47,18 @@ ThemeData lightTheme(String fontFamily) {
   );
 }
 
-ThemeData darkTheme(String fontFamily) {
+ThemeData darkTheme(String fontFamily, Size size) {
   return ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(Colors.white),
+          backgroundColor: MaterialStatePropertyAll(Colors.blueAccent.shade700),
+          fixedSize: MaterialStatePropertyAll(
+            Size(size.width, 45),
+          ),
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(14),
       filled: true,

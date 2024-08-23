@@ -11,5 +11,13 @@
   "hintSearchTextField": "جستجو بر اساس نام",
     "activeUserCount": "تعداد کاربران فعال",
   "notactiveUserCount": "تعداد کاربران غیرفعال",
-  "count": "تعداد {count}"
+  "count": "تعداد {count}",
+  "name": "نام",
+  "phone": "شماره",
+  "registerDate": "تاریخ ثبت نام",
+  "expireDate": "تاریخ انقضا",
+  "HalfMonth": "15 روز",
+  "oneMonth": "1 ماه",
+  "threeMonth": "3 ماه"
+
 }

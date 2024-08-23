@@ -12,5 +12,12 @@ class AppStrings {
   static const String activeUserCount = "activeUserCount";
   static const String notactiveUserCount = "notactiveUserCount";
   static const String count = "count";
+  static const String name = "name";
+  static const String phone = "phone";
+  static const String registerDate = "registerDate";
+  static const String expireDate = "expireDate";
+  static const String HalfMonth = "HalfMonth";
+  static const String oneMonth = "oneMonth";
+  static const String threeMonth = "threeMonth";
   
 }

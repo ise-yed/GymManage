@@ -3,59 +3,70 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/data/models/user.dart';
+import 'package:gym_managment/main.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class ChangeUserScreen extends StatelessWidget {
+class ChangeUserScreen extends StatefulWidget {
   ChangeUserScreen({super.key, required this.userData});
   UserModel userData;
 
+  @override
+  State<ChangeUserScreen> createState() => _ChangeUserScreenState();
+}
+
+class _ChangeUserScreenState extends State<ChangeUserScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for the TextFormFields
   final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _idController = TextEditingController();
-  final _string1Controller = TextEditingController();
-  final _string2Controller = TextEditingController();
 
+  final _phoneController = TextEditingController();
+
+  final _registerDateController = TextEditingController();
+
+  final _expireDateController = TextEditingController();
+
+  var box = Hive.box<UserModel>(boxValue);
+  var radioState = 0;
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        height: size.height,
-        width: size.width,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          height: size.height,
+          width: size.width,
           child: Column(
             children: [
-              SizedBox(
-                height: 64,
+              const SizedBox(
+                height: 74,
               ),
               Image(
-                image: AssetImage(
+                image: const AssetImage(
                   'assets/images/logo.png',
                 ),
                 width: size.width / 2,
-                height: size.height / 8,
+                height: size.height / 7,
               ),
               Text(
                 AppStrings.appbarTitle.tr(),
                 style: textTheme.bodyLarge!
                     .copyWith(fontWeight: FontWeight.w700, fontSize: 19),
               ),
-              SizedBox(
-                height: 6,
+              const SizedBox(
+                height: 14,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.person_add_alt_outlined,
                     size: 22,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
@@ -65,9 +76,10 @@ class ChangeUserScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
-                height: 24,
+              const SizedBox(
+                height: 32,
               ),
+              // ! TextFields
               Form(
                 key: _formKey,
                 child: Column(
@@ -75,22 +87,20 @@ class ChangeUserScreen extends StatelessWidget {
                     TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Name',
+                        labelText: AppStrings.name.tr(),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value!.isEmpty) {
                           return 'Please enter your name';
                         }
                         return null;
                       },
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 24),
                     TextFormField(
                       controller: _phoneController,
                       decoration: InputDecoration(
-                       
-                        labelText: 'Phone',
-                     
+                        labelText: AppStrings.phone.tr(),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -99,28 +109,14 @@ class ChangeUserScreen extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 24),
                     TextFormField(
-                      controller: _idController,
+                      readOnly: true,
+                      onTap: () {},
+                      controller: _registerDateController,
                       decoration: InputDecoration(
-                      
-                        labelText: 'ID',
-                       
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your ID';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    TextFormField(
-                      controller: _string1Controller,
-                      decoration: InputDecoration(
-                      
-                        labelText: 'String 1',
-                   
+                        suffixIcon: const Icon(Icons.calendar_month_outlined),
+                        labelText: AppStrings.registerDate.tr(),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -129,13 +125,88 @@ class ChangeUserScreen extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    //  ! radio row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: Radio(
+                                value: radioState,
+                                groupValue: 0,
+                                onChanged: (value) {
+                                  setState(() {
+                                    radioState = 0;
+                                  });
+                                },
+                              ),
+                            ),
+                            Text(
+                              AppStrings.HalfMonth.tr(),
+                              style: textTheme.bodyMedium,
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: Radio(
+                                value: radioState,
+                                groupValue: 1,
+                                onChanged: (value) {
+                                  setState(() {
+                                    radioState = 1;
+                                  });
+                                },
+                              ),
+                            ),
+                            Text(
+                              AppStrings.oneMonth.tr(),
+                              style: textTheme.bodyMedium,
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: Radio(
+                                value: radioState,
+                                groupValue: 2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    radioState = 2;
+                                  });
+                                },
+                              ),
+                            ),
+                            Text(
+                              AppStrings.threeMonth.tr(),
+                              style: textTheme.bodyMedium,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
                     TextFormField(
-                      controller: _string2Controller,
+                      onTap: () {
+                        print("s");
+                      },
+                      readOnly: true,
+                      controller: _expireDateController,
                       decoration: InputDecoration(
-                   
-                        labelText: 'String 2',
-                       
+                        suffixIcon: const Icon(Icons.calendar_month_outlined),
+                        labelText: AppStrings.expireDate.tr(),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -144,17 +215,29 @@ class ChangeUserScreen extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
+                          print(_nameController.text);
+                          box.add(UserModel(
+                              name: _nameController.text,
+                              expireDate: _expireDateController.text,
+                              registerDate: _registerDateController.text,
+                              number: _phoneController.text));
+
+                          print(box.values.length);
                           // Handle form submission
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Form is valid!')),
+                            const SnackBar(content: Text('Form is valid!')),
                           );
                         }
                       },
-                      child: Text('Validate'),
+                      child: Text(
+                        AppStrings.ok.tr(),
+                        style: textTheme.bodyLarge!
+                            .copyWith(fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ],
                 ),

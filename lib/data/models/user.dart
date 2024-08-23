@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'user.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class UserModel extends HiveObject {
   @HiveField(0)
   String? name;
@@ -12,8 +12,7 @@ class UserModel extends HiveObject {
   String? registerDate;
   @HiveField(3)
   String? expireDate;
-  @HiveField(4)
-  int? id;
+
   UserModel(
-      {this.expireDate, this.registerDate, this.name, this.number, this.id});
+      {this.expireDate, this.registerDate, this.name, this.number, });
 }

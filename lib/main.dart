@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<bool> isDarkMode = ValueNotifier(false);
-String boxValue = 'gym-data';
+String boxValue = 'gym-datas';
 late SharedPreferences isDarkModeState;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,12 +34,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return ValueListenableBuilder(
       valueListenable: isDarkMode,
       builder: (context, value, child) {
         return MaterialApp(
-          theme: lightTheme('dana'),
-          darkTheme: darkTheme('dana'),
+          theme: lightTheme('dana', size),
+          darkTheme: darkTheme('dana', size),
           themeMode: value == false ? ThemeMode.light : ThemeMode.dark,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
