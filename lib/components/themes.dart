@@ -9,7 +9,7 @@ ThemeData lightTheme(String fontFamily) {
     colorScheme: ColorScheme.light(
         primary: Colors.black,
         onPrimary: Colors.white,
-        secondary: Colors.blue.shade800,
+        secondary:Colors.blueAccent.shade700,
         onSecondary: Colors.white),
     fontFamily: fontFamily,
     textTheme: const TextTheme(
@@ -29,7 +29,7 @@ ThemeData darkTheme(String fontFamily) {
     colorScheme: ColorScheme.dark(
         primary: Colors.white,
         onPrimary: Colors.black,
-        secondary: Colors.blue.shade800,
+        secondary: Colors.blueAccent.shade700,
         onSecondary: Colors.white),
     fontFamily: fontFamily,
     textTheme: const TextTheme(

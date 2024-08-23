@@ -1,10 +1,15 @@
 class AppStrings {
   static const String appbarTitle = "appbarTitle";
   static const String ok = 'اوکی';
-  static const String activeUser = 'کاربران فعال';
-  static const String NotactiveUser = 'کاربران غیرفعال';
-  static const String goDarkMode = 'رفتیم حالت شب';
-  static const String goLightMode = 'رفتیم حالت روز';
-  static const String goEnglishMode = 'انگلیسی هم خوبه :)';
-  static const String goPersianMode = 'فارسی هم خوبه :)';
+  static const String activeUser = "activeUser";
+  static const String NotactiveUser = "NotactiveUser";
+  static const String goDarkMode ="goDarkMode";
+  static const String goLightMode = "goLightMode";
+  static const String goEnglishMode = "goEnglishMode";
+  static const String goPersianMode = "goPersianMode";
+  static const String floatingActionButtonToolTip = "floatingActionButtonToolTip";
+  static const String hintSearchTextField = "hintSearchTextField";
+  static const String activeUserCount = "activeUserCount";
+  static const String notactiveUserCount = "notactiveUserCount";
+  static const String count = "count";
 }

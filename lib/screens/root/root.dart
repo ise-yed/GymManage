@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
+import 'package:gym_managment/screens/home/home.dart';
 import 'package:gym_managment/utils/snackbar.dart';
 
 class RootScreen extends StatefulWidget {
@@ -19,8 +20,8 @@ class _RootScreenState extends State<RootScreen> {
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
     return Scaffold(
-      body: Container(
-        color: Colors.blue,
+      body: HomeScreen(
+        userState: userState == 0 ? 0 : 1,
       ),
       appBar: AppBar(
         title: Row(
@@ -47,23 +48,23 @@ class _RootScreenState extends State<RootScreen> {
                   },
                   icon: Icon(
                     isDarkMode.value != false
-                        ? Icons.dark_mode_outlined
-                        : Icons.dark_mode_rounded,
+                        ? Icons.dark_mode_rounded
+                        : Icons.dark_mode_outlined,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 IconButton(
                   iconSize: 24,
                   onPressed: () {
-                    // snackbarCustom(
-                    //     context,
-                    //     isDarkMode.value == false
-                    //         ? AppStrings.goEnglishMode
-                    //         : AppStrings.goPersianMode,
-                    //     textTheme,
-                    //     ColorState.green);
-                    // isDarkMode.value = !isDarkMode.value;
-                    // isDarkModeState.setBool('darkmode', isDarkMode.value);
+                    snackbarCustom(
+                        context,
+                        isDarkMode.value == false
+                            ? AppStrings.goPersianMode.tr()
+                            : AppStrings.goEnglishMode.tr(),
+                        textTheme,
+                        ColorState.green);
+                    isDarkMode.value = !isDarkMode.value;
+                    isDarkModeState.setBool('darkmode', isDarkMode.value);
 
                     context.setLocale(context.locale == Locale('fa', 'IR')
                         ? Locale('en', 'US')
@@ -82,7 +83,7 @@ class _RootScreenState extends State<RootScreen> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: 72,
+        height: 67,
         child: Column(
           children: [
             AnimatedAlign(
@@ -112,7 +113,7 @@ class _RootScreenState extends State<RootScreen> {
                     });
                   },
                   child: SizedBox(
-                    height: 70,
+                    height: 65,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -126,7 +127,7 @@ class _RootScreenState extends State<RootScreen> {
                           width: 5,
                         ),
                         Text(
-                          AppStrings.activeUser,
+                          AppStrings.activeUser.tr(),
                           style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                             color: userState != 0
@@ -146,7 +147,7 @@ class _RootScreenState extends State<RootScreen> {
                     });
                   },
                   child: SizedBox(
-                    height: 70,
+                    height: 65,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -160,7 +161,7 @@ class _RootScreenState extends State<RootScreen> {
                           width: 5,
                         ),
                         Text(
-                          AppStrings.NotactiveUser,
+                          AppStrings.NotactiveUser.tr(),
                           style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                             color: userState != 1

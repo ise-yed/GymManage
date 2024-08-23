@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_managment/components/themes.dart';
 import 'package:gym_managment/data/models/user.dart';
-import 'package:gym_managment/screen/root/root.dart';
+import 'package:gym_managment/screens/root/root.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
