@@ -77,30 +77,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 16,
               ),
               Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color:widget.userState==0?Colors.green:Colors.red,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                        widget.userState==0?    AppStrings.activeUserCount.tr():  AppStrings.notactiveUserCount.tr(),
-                            style: textTheme.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.w700, fontSize: 12),
-                          ),
-                          Text(
-                            AppStrings.count
-                                .tr(namedArgs: {AppStrings.count: dataChanger().length.toString()}),
-                            style: textTheme.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.w700, fontSize: 12),
-                          ),
-                        ],
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                height: 35,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: widget.userState == 0 ? Colors.green : Colors.red,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.userState == 0
+                          ? AppStrings.activeUserCount.tr()
+                          : AppStrings.notactiveUserCount.tr(),
+                      style: textTheme.bodyMedium!
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 12),
                     ),
-             
+                    Text(
+                      AppStrings.count.tr(namedArgs: {
+                        AppStrings.count: dataChanger().length.toString()
+                      }),
+                      style: textTheme.bodyMedium!
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+
               // !LIST VIEW
               Expanded(
                   // ! First lisinable for search
@@ -120,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             .toList();
                       }
 
-                      print(listData.toString());
                       return ListView.builder(
                         itemCount: listData.length,
                         physics: const BouncingScrollPhysics(),
@@ -157,7 +159,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     GestureDetector(
                                       behavior: HitTestBehavior.opaque,
                                       onTap: () {
-                                        // عمل مورد نظر
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) {
+                                            return ChangeUserScreen(
+                                                userData: user);
+                                          },
+                                        ));
+                                        print("edit");
                                       },
                                       child: const Icon(
                                         Icons.edit,
@@ -202,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
                     return ChangeUserScreen(
-                      userData: UserModel(),
+                      userData: UserModel(number: null),
                     );
                   },
                 ));

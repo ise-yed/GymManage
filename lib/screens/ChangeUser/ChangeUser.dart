@@ -32,6 +32,22 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
   var radioState = 0;
   Jalali? registerDate;
   Jalali? expireDate;
+
+
+  @override
+  void initState() {
+    if(widget.userData.number !=null){
+         _nameController.text=  widget.userData.name!;
+                         
+                              _expireDateController.text=  widget.userData.expireDate! ;
+                      
+                              _registerDateController.text =    widget.userData.registerDate !;
+                           _phoneController.text =widget.userData.number! ;
+    
+   
+  }
+   super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
