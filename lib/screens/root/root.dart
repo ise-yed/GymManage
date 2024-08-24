@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
 import 'package:gym_managment/screens/home/home.dart';
@@ -35,13 +34,13 @@ class _RootScreenState extends State<RootScreen> {
             AnimatedAlign(
               curve: Curves.linearToEaseOut,
               alignment: userState == 0
-                  ? (context.locale == Locale('en', 'US')
+                  ? (context.locale == const Locale('en', 'US')
                       ? Alignment.centerLeft
                       : Alignment.centerRight)
-                  : (context.locale == Locale('en', 'US')
+                  : (context.locale == const Locale('en', 'US')
                       ? Alignment.centerRight
                       : Alignment.centerLeft),
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               child: Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width / 2,
@@ -69,7 +68,7 @@ class _RootScreenState extends State<RootScreen> {
                               ? Colors.grey.shade400
                               : color.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
@@ -103,7 +102,7 @@ class _RootScreenState extends State<RootScreen> {
                               ? Colors.grey.shade400
                               : color.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
