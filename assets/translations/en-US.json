@@ -20,6 +20,10 @@
   "HalfMonth": "15 Days",
   "oneMonth": "1 Month",
   "threeMonth": "3 Month",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "nameError": "must fill this field",
+  "numberError": "You must enter 11 digits",
+  "registerError": "You must select a date",
+  "expireError": "You must select a date"
 
 }

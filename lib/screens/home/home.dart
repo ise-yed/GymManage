@@ -1,26 +1,24 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/data/models/user.dart';
 import 'package:gym_managment/main.dart';
-import 'package:gym_managment/screens/ChangeUser/ChangeUser.dart';
-import 'package:hive/hive.dart';
+import 'package:gym_managment/screens/ChangeUser/config_user.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key, required this.userState});
-  int userState;
+  const HomeScreen({super.key, required this.userState});
+  final int userState;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ValueNotifier<String> SearchValue = ValueNotifier('');
+  ValueNotifier<String> searchValue = ValueNotifier('');
 
-  TextEditingController SearchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   var box = Hive.box<UserModel>(boxValue);
 
@@ -56,9 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
               // ! Search Section
               TextField(
                 onChanged: (value) {
-                  SearchValue.value = value;
+                  searchValue.value = value;
                 },
-                controller: SearchController,
+                controller: searchController,
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(14),
                     filled: true,
@@ -67,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontFamily: 'dana',
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                    fillColor: const Color.fromARGB(170, 158, 158, 158),
+                        color: Colors.black),
+                    fillColor: const Color.fromARGB(255, 150, 145, 145),
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(14))),
@@ -91,14 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? AppStrings.activeUserCount.tr()
                           : AppStrings.notactiveUserCount.tr(),
                       style: textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.w700, fontSize: 12),
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 13),
                     ),
                     Text(
                       AppStrings.count.tr(namedArgs: {
                         AppStrings.count: dataChanger().length.toString()
                       }),
                       style: textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.w700, fontSize: 12),
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 13),
                     ),
                   ],
                 ),
@@ -108,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                   // ! First lisinable for search
                   child: ValueListenableBuilder(
-                valueListenable: SearchValue,
+                valueListenable: searchValue,
                 builder: (context, value, child) {
                   // ! lisinable for box
                   return ValueListenableBuilder(
@@ -116,10 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, value, child) {
                       // ! result of search Data
                       var listData = dataChanger();
-                      if (SearchValue.value.isNotEmpty) {
+                      if (searchValue.value.isNotEmpty) {
                         listData = dataChanger()
                             .where((element) =>
-                                element.name!.contains(SearchValue.value))
+                                element.name!.contains(searchValue.value))
                             .toList();
                       }
 
@@ -130,10 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           var user = listData[index];
                           return Container(
                             height: 45,
-                            margin: const EdgeInsets.only(top: 18),
+                            margin: const EdgeInsets.only(top: 24),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: const Color.fromARGB(120, 158, 158, 158),
+                              color: const Color.fromARGB(140, 158, 158, 158),
                             ),
                             child: Row(
                               children: [
@@ -166,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 userData: user);
                                           },
                                         ));
-                                        print("edit");
+                                     
                                       },
                                       child: const Icon(
                                         Icons.edit,
@@ -180,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       behavior: HitTestBehavior.opaque,
                                       onTap: () async {
                                         await user.delete();
-                                        print("object");
+                                     
                                       },
                                       child: const Icon(
                                         Icons.delete,

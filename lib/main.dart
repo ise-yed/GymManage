@@ -15,12 +15,12 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
-  var box = await Hive.openBox<UserModel>(boxValue);
+ await Hive.openBox<UserModel>(boxValue);
   isDarkModeState = await SharedPreferences.getInstance();
   isDarkMode.value = isDarkModeState.getBool('darkmode') ?? false;
   runApp(
     EasyLocalization(
-      supportedLocales: [const Locale('en', 'US'), const Locale('fa', 'IR')],
+      supportedLocales: const [Locale('en', 'US'), Locale('fa', 'IR')],
       path: 'assets/translations', 
       startLocale: const Locale('fa', 'IR'),
       saveLocale: true,
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: isDarkMode,
       builder: (context, value, child) {
-        return MaterialApp(
+        return MaterialApp(debugShowCheckedModeBanner: false,
           theme: lightTheme('dana', size),
           darkTheme: darkTheme('dana', size),
           themeMode: value == false ? ThemeMode.light : ThemeMode.dark,

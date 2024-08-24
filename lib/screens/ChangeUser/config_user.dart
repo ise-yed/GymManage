@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/data/models/user.dart';
 import 'package:gym_managment/main.dart';
+import 'package:gym_managment/utils/snackbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 class ChangeUserScreen extends StatefulWidget {
-  ChangeUserScreen({super.key, required this.userData});
-  UserModel userData;
+  const ChangeUserScreen({super.key, required this.userData});
+  final UserModel userData;
 
   @override
   State<ChangeUserScreen> createState() => _ChangeUserScreenState();
@@ -19,7 +19,6 @@ class ChangeUserScreen extends StatefulWidget {
 class _ChangeUserScreenState extends State<ChangeUserScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for the TextFormFields
   final _nameController = TextEditingController();
 
   final _phoneController = TextEditingController();
@@ -33,25 +32,23 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
   Jalali? registerDate;
   Jalali? expireDate;
 
-
   @override
   void initState() {
-    if(widget.userData.number !=null){
-         _nameController.text=  widget.userData.name!;
-                         
-                              _expireDateController.text=  widget.userData.expireDate! ;
-                      
-                              _registerDateController.text =    widget.userData.registerDate !;
-                           _phoneController.text =widget.userData.number! ;
-    
-   
+    if (widget.userData.number != null) {
+      _nameController.text = widget.userData.name!;
+
+      _expireDateController.text = widget.userData.expireDate!;
+
+      _registerDateController.text = widget.userData.registerDate!;
+      _phoneController.text = widget.userData.number!;
+    }
+    super.initState();
   }
-   super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var color = Theme.of(context).colorScheme;
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -111,13 +108,19 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your name';
+                          return AppStrings.nameError.tr();
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 24),
+
                     TextFormField(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(11),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      keyboardType: TextInputType.number,
                       controller: _phoneController,
                       decoration: InputDecoration(
                         labelText: AppStrings.phone.tr(),
@@ -125,6 +128,8 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your phone number';
+                        } else if (value.length != 11) {
+                          return AppStrings.numberError.tr();
                         }
                         return null;
                       },
@@ -163,7 +168,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter String 1';
+                          return AppStrings.registerDate.tr();
                         }
                         return null;
                       },
@@ -178,8 +183,8 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 24,
-                              width: 24,
+                              height: 30,
+                              width: 30,
                               child: Radio(
                                 value: radioState,
                                 groupValue: 0,
@@ -194,7 +199,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                               ),
                             ),
                             Text(
-                              AppStrings.HalfMonth.tr(),
+                              AppStrings.halfMonth.tr(),
                               style: textTheme.bodyMedium,
                             )
                           ],
@@ -202,8 +207,8 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 24,
-                              width: 24,
+                              height: 30,
+                              width: 30,
                               child: Radio(
                                 value: radioState,
                                 groupValue: 1,
@@ -226,8 +231,8 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 24,
-                              width: 24,
+                              height: 30,
+                              width: 30,
                               child: Radio(
                                 value: radioState,
                                 groupValue: 2,
@@ -269,7 +274,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter String 2';
+                          return AppStrings.expireError.tr();
                         }
                         return null;
                       },
@@ -284,19 +289,23 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                           widget.userData.registerDate =
                               _registerDateController.text;
                           widget.userData.number = _phoneController.text;
-                          box.add(widget.userData);
-                          print(widget.userData);
-                          print(box.values.length);
-                          // Handle form submission
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Form is valid!')),
-                          );
+
+                          if (widget.userData.number != null) {
+                            widget.userData.save();
+                          } else {
+                            box.add(widget.userData);
+                          }
+                      
+
+                          Navigator.pop(context);
+                          snackbarCustom(context, AppStrings.ok.tr(), textTheme,
+                              ColorState.green);
                         }
                       },
                       child: Text(
                         AppStrings.confirm.tr(),
-                        style: textTheme.bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w700),
+                        style: textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.w700, color: Colors.white),
                       ),
                     ),
                   ],
