@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/data/models/user.dart';
 import 'package:gym_managment/main.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 class ChangeUserScreen extends StatefulWidget {
   ChangeUserScreen({super.key, required this.userData});
@@ -28,6 +30,8 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
 
   var box = Hive.box<UserModel>(boxValue);
   var radioState = 0;
+  Jalali? registerDate;
+  Jalali? expireDate;
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -112,7 +116,30 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                     const SizedBox(height: 24),
                     TextFormField(
                       readOnly: true,
-                      onTap: () {},
+                      onTap: () async {
+                        registerDate = await showPersianDatePicker(
+                          context: context,
+                          initialDate: Jalali.now(),
+                          firstDate: Jalali(1385, 8),
+                          lastDate: Jalali(1450, 9),
+                        );
+                        _registerDateController.text =
+                            registerDate!.formatCompactDate();
+                        switch (radioState) {
+                          case 0:
+                            _expireDateController.text =
+                                registerDate!.addDays(15).formatCompactDate();
+                            break;
+                          case 1:
+                            _expireDateController.text =
+                                registerDate!.addMonths(1).formatCompactDate();
+                            break;
+                          case 2:
+                            _expireDateController.text =
+                                registerDate!.addMonths(3).formatCompactDate();
+                            break;
+                        }
+                      },
                       controller: _registerDateController,
                       decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.calendar_month_outlined),
@@ -143,6 +170,9 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     radioState = 0;
+                                    _expireDateController.text = registerDate!
+                                        .addDays(15)
+                                        .formatCompactDate();
                                   });
                                 },
                               ),
@@ -164,6 +194,9 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     radioState = 1;
+                                    _expireDateController.text = registerDate!
+                                        .addMonths(1)
+                                        .formatCompactDate();
                                   });
                                 },
                               ),
@@ -185,6 +218,9 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     radioState = 2;
+                                    _expireDateController.text = registerDate!
+                                        .addMonths(3)
+                                        .formatCompactDate();
                                   });
                                 },
                               ),
@@ -199,8 +235,15 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                     ),
                     const SizedBox(height: 24),
                     TextFormField(
-                      onTap: () {
-                        print("s");
+                      onTap: () async {
+                        expireDate = await showPersianDatePicker(
+                          context: context,
+                          initialDate: Jalali.now(),
+                          firstDate: Jalali(1385, 8),
+                          lastDate: Jalali(1450, 9),
+                        );
+                        _expireDateController.text =
+                            expireDate!.formatCompactDate();
                       },
                       readOnly: true,
                       controller: _expireDateController,
@@ -219,13 +262,14 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          print(_nameController.text);
-                          box.add(UserModel(
-                              name: _nameController.text,
-                              expireDate: _expireDateController.text,
-                              registerDate: _registerDateController.text,
-                              number: _phoneController.text));
-
+                          widget.userData.name = _nameController.text;
+                          widget.userData.expireDate =
+                              _expireDateController.text;
+                          widget.userData.registerDate =
+                              _registerDateController.text;
+                          widget.userData.number = _phoneController.text;
+                          box.add(widget.userData);
+                          print(widget.userData);
                           print(box.values.length);
                           // Handle form submission
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -234,7 +278,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                         }
                       },
                       child: Text(
-                        AppStrings.ok.tr(),
+                        AppStrings.confirm.tr(),
                         style: textTheme.bodyLarge!
                             .copyWith(fontWeight: FontWeight.w700),
                       ),

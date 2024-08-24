@@ -21,7 +21,7 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [const Locale('en', 'US'), const Locale('fa', 'IR')],
-      path: 'assets/translations', // مسیر فایل‌های ترجمه
+      path: 'assets/translations', 
       startLocale: const Locale('fa', 'IR'),
       saveLocale: true,
       child: const MyApp(),

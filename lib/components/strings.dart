@@ -19,5 +19,6 @@ class AppStrings {
   static const String HalfMonth = "HalfMonth";
   static const String oneMonth = "oneMonth";
   static const String threeMonth = "threeMonth";
+  static const String confirm = "confirm";
   
 }
