@@ -290,7 +290,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                               _registerDateController.text;
                           widget.userData.number = _phoneController.text;
 
-                          if (widget.userData.number != null) {
+                          if (widget.userData.isInBox) {
                             widget.userData.save();
                           } else {
                             box.add(widget.userData);

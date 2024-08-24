@@ -15,10 +15,10 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
- await Hive.openBox<UserModel>(boxValue);
+  await Hive.openBox<UserModel>(boxValue);
   isDarkModeState = await SharedPreferences.getInstance();
   isDarkMode.value = isDarkModeState.getBool('darkmode') ?? false;
-  runApp(
+  runApp( 
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('fa', 'IR')],
       path: 'assets/translations', 
