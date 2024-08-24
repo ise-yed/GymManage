@@ -4,11 +4,13 @@ import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
 import 'package:gym_managment/utils/snackbar.dart';
 
-class appbar extends StatelessWidget {
-  const appbar({
+class Appbar extends StatelessWidget {
+   const Appbar({
     super.key,
     required this.textTheme,
+    required this.userState
   });
+ final int userState;
 
   final TextTheme textTheme;
 
@@ -17,9 +19,16 @@ class appbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          AppStrings.appbarTitle.tr(),
-          style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+        // Text(
+        //   AppStrings.appbarTitle.tr(),
+        //   style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
+        // ),
+        Image(
+          image: const AssetImage(
+            'assets/images/logo.png',
+          ),
+          width: MediaQuery.of(context).size.width / 4,
+          color:userState ==0? Colors.green:Colors.red,
         ),
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -55,10 +64,10 @@ class appbar extends StatelessWidget {
                     ColorState.green);
                 isDarkMode.value = !isDarkMode.value;
                 isDarkModeState.setBool('darkmode', isDarkMode.value);
-    
-                context.setLocale(context.locale == Locale('fa', 'IR')
-                    ? Locale('en', 'US')
-                    : Locale('fa', 'IR'));
+
+                context.setLocale(context.locale == const Locale('fa', 'IR')
+                    ? const Locale('en', 'US')
+                    : const Locale('fa', 'IR'));
               },
               icon: Icon(
                 isDarkMode.value != false

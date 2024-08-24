@@ -11,7 +11,7 @@ ThemeData lightTheme(String fontFamily, Size size) {
   return ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(Colors.white),
+          foregroundColor: const MaterialStatePropertyAll(Colors.white),
           backgroundColor: MaterialStatePropertyAll(Colors.blueAccent.shade700),
           fixedSize: MaterialStatePropertyAll(
             Size(size.width, 45),
@@ -20,7 +20,7 @@ ThemeData lightTheme(String fontFamily, Size size) {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: EdgeInsets.all(14),
+      contentPadding: const EdgeInsets.all(14),
       filled: true,
       fillColor: const Color(0xFFF5F5F5),
       border: _buildBorder(Colors.grey),
@@ -51,7 +51,7 @@ ThemeData darkTheme(String fontFamily, Size size) {
   return ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(Colors.white),
+          foregroundColor: const MaterialStatePropertyAll(Colors.white),
           backgroundColor: MaterialStatePropertyAll(Colors.blueAccent.shade700),
           fixedSize: MaterialStatePropertyAll(
             Size(size.width, 45),
@@ -60,7 +60,7 @@ ThemeData darkTheme(String fontFamily, Size size) {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: EdgeInsets.all(14),
+      contentPadding: const EdgeInsets.all(14),
       filled: true,
       fillColor: const Color(0xFF212121),
       border: _buildBorder(Colors.grey),
@@ -69,7 +69,7 @@ ThemeData darkTheme(String fontFamily, Size size) {
       errorBorder: _buildBorder(Colors.red),
       focusedErrorBorder: _buildBorder(Colors.redAccent),
     ),
-    appBarTheme: const AppBarTheme(backgroundColor: const Color(0xFF212121)),
+    appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF212121)),
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: Color(0xFF212121)),
     scaffoldBackgroundColor: const Color(0xFF212121),

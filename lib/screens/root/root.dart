@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_managment/components/strings.dart';
-import 'package:gym_managment/main.dart';
 import 'package:gym_managment/screens/home/home.dart';
-import 'package:gym_managment/utils/snackbar.dart';
 
 import 'appbar.dart';
 
@@ -25,7 +23,7 @@ class _RootScreenState extends State<RootScreen> {
         userState: userState == 0 ? 0 : 1,
       ),
       appBar: AppBar(
-        title: appbar(textTheme: textTheme),
+        title: Appbar(textTheme: textTheme,userState: userState,),
       ),
       bottomNavigationBar: SizedBox(
         height: 67,
@@ -106,7 +104,7 @@ class _RootScreenState extends State<RootScreen> {
                           width: 5,
                         ),
                         Text(
-                          AppStrings.NotactiveUser.tr(),
+                          AppStrings.notactiveUser.tr(),
                           style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                             color: userState != 1
