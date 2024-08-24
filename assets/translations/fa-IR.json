@@ -1,4 +1,24 @@
 {
-    "appbarTitle":"باشگاه ورزشی سید"
+  "appbarTitle": "باشگاه ورزشی سید",
+  "ok": "اوکی",
+  "activeUser": "کاربران فعال",
+  "NotactiveUser": "کاربران غیرفعال",
+  "goDarkMode": "رفتیم حالت شب",
+  "goLightMode": "رفتیم حالت روز",
+  "goEnglishMode": "انگلیسی هم خوبه :)",
+  "goPersianMode": "فارسی هم خوبه :)",
+  "floatingActionButtonToolTip": "اضافه کردن کاربر",
+  "hintSearchTextField": "جستجو بر اساس نام",
+    "activeUserCount": "تعداد کاربران فعال",
+  "notactiveUserCount": "تعداد کاربران غیرفعال",
+  "count": "تعداد {count}",
+  "name": "نام",
+  "phone": "شماره",
+  "registerDate": "تاریخ ثبت نام",
+  "expireDate": "تاریخ انقضا",
+  "HalfMonth": "15 روز",
+  "oneMonth": "1 ماه",
+  "threeMonth": "3 ماه",
+  "confirm": "تایید"
 
 }

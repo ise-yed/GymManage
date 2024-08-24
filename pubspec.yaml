@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   shared_preferences: ^2.2.3
   easy_localization: ^3.0.7
+  persian_datetime_picker: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   assets:
     - assets/translations/
     - assets/fonts/
+    - assets/images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

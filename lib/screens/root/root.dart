@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_managment/components/strings.dart';
 import 'package:gym_managment/main.dart';
+import 'package:gym_managment/screens/home/home.dart';
 import 'package:gym_managment/utils/snackbar.dart';
+
+import 'appbar.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -18,70 +21,14 @@ class _RootScreenState extends State<RootScreen> {
     var textTheme = Theme.of(context).textTheme;
     var color = Theme.of(context).colorScheme;
     return Scaffold(
-      body: Container(
-        color: Colors.blue,
+      body: HomeScreen(
+        userState: userState == 0 ? 0 : 1,
       ),
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppStrings.appbarTitle.tr(),
-              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    snackbarCustom(
-                        context,
-                        isDarkMode.value == false
-                            ? AppStrings.goDarkMode
-                            : AppStrings.goLightMode,
-                        textTheme,
-                        ColorState.green);
-                    isDarkMode.value = !isDarkMode.value;
-                    isDarkModeState.setBool('darkmode', isDarkMode.value);
-                  },
-                  icon: Icon(
-                    isDarkMode.value != false
-                        ? Icons.dark_mode_outlined
-                        : Icons.dark_mode_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                IconButton(
-                  iconSize: 24,
-                  onPressed: () {
-                    // snackbarCustom(
-                    //     context,
-                    //     isDarkMode.value == false
-                    //         ? AppStrings.goEnglishMode
-                    //         : AppStrings.goPersianMode,
-                    //     textTheme,
-                    //     ColorState.green);
-                    // isDarkMode.value = !isDarkMode.value;
-                    // isDarkModeState.setBool('darkmode', isDarkMode.value);
-
-                    context.setLocale(context.locale == const Locale('fa', 'IR')
-                        ? const Locale('en', 'US')
-                        : const Locale('fa', 'IR'));
-                  },
-                  icon: Icon(
-                    isDarkMode.value != false
-                        ? Icons.language_rounded
-                        : Icons.language_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        title: appbar(textTheme: textTheme),
       ),
       bottomNavigationBar: SizedBox(
-        height: 72,
+        height: 67,
         child: Column(
           children: [
             AnimatedAlign(
@@ -111,7 +58,7 @@ class _RootScreenState extends State<RootScreen> {
                     });
                   },
                   child: SizedBox(
-                    height: 70,
+                    height: 65,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -125,7 +72,7 @@ class _RootScreenState extends State<RootScreen> {
                           width: 5,
                         ),
                         Text(
-                          AppStrings.activeUser,
+                          AppStrings.activeUser.tr(),
                           style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                             color: userState != 0
@@ -145,7 +92,7 @@ class _RootScreenState extends State<RootScreen> {
                     });
                   },
                   child: SizedBox(
-                    height: 70,
+                    height: 65,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -159,7 +106,7 @@ class _RootScreenState extends State<RootScreen> {
                           width: 5,
                         ),
                         Text(
-                          AppStrings.NotactiveUser,
+                          AppStrings.NotactiveUser.tr(),
                           style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                             color: userState != 1

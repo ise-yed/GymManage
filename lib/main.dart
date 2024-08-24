@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_managment/components/themes.dart';
 import 'package:gym_managment/data/models/user.dart';
-import 'package:gym_managment/screen/root/root.dart';
+import 'package:gym_managment/screens/root/root.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<bool> isDarkMode = ValueNotifier(false);
-String boxValue = 'gym-data';
+String boxValue = 'gym-datas';
 late SharedPreferences isDarkModeState;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [const Locale('en', 'US'), const Locale('fa', 'IR')],
-      path: 'assets/translations', // مسیر فایل‌های ترجمه
+      path: 'assets/translations', 
       startLocale: const Locale('fa', 'IR'),
       saveLocale: true,
       child: const MyApp(),
@@ -34,12 +34,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return ValueListenableBuilder(
       valueListenable: isDarkMode,
       builder: (context, value, child) {
         return MaterialApp(
-          theme: lightTheme('dana'),
-          darkTheme: darkTheme('dana'),
+          theme: lightTheme('dana', size),
+          darkTheme: darkTheme('dana', size),
           themeMode: value == false ? ThemeMode.light : ThemeMode.dark,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

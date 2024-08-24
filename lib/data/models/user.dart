@@ -1,25 +1,18 @@
 import 'package:hive/hive.dart';
 
-
 part 'user.g.dart';
-@HiveType(typeId: 1)
+
+@HiveType(typeId: 0)
 class UserModel extends HiveObject {
   @HiveField(0)
-  String name;
+  String? name;
   @HiveField(1)
-  String number;
+  String? number;
   @HiveField(2)
-  String registerDate;
+  String? registerDate;
   @HiveField(3)
-  String expireDate;
-  @HiveField(4)
-  int id;
+  String? expireDate;
+
   UserModel(
-      {required this.expireDate,
-      required this.registerDate,
-      required this.name,
-      required this.number,
-      
-      required this.id
-      });
+      {this.expireDate, this.registerDate, this.name, this.number, });
 }

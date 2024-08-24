@@ -1,3 +1,25 @@
 {
-  "appbarTitle": "Seyed Gym Sport"
+  "appbarTitle": "Seyed Gym Sport",
+
+  "ok": "Ok",
+  "activeUser": "Active Users",
+  "NotactiveUser": "Deactive Users",
+  "goDarkMode": "Going To Night Mode",
+  "goLightMode": "Going To Light Mode",
+  "goEnglishMode": "Going To English Language",
+  "goPersianMode": "Going To Persian Language",
+  "floatingActionButtonToolTip": "Add User",
+  "hintSearchTextField": "ُSearch By Name",
+  "activeUserCount": "Active User Count",
+  "notactiveUserCount": "Not Active User Count",
+  "count": "Count {count}",
+  "name": "Name",
+  "phone": "Phone",
+  "registerDate": "Register Date",
+  "expireDate": "Expire Date",
+  "HalfMonth": "15 Days",
+  "oneMonth": "1 Month",
+  "threeMonth": "3 Month",
+  "confirm": "Confirm"
+
 }
