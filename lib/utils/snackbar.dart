@@ -22,10 +22,10 @@ snackbarCustom(BuildContext context, String title, TextTheme textTheme,
       backgroundColor: backColor,
       duration: const Duration(seconds: 1),
       content: Text(
+        textAlign: TextAlign.right,
         title,
         style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
       ),
-   
 
       //  SnackBarAction(label: 'hi', onPressed: () {
 

@@ -38,8 +38,8 @@ class Appbar extends StatelessWidget {
                 snackbarCustom(
                     context,
                     isDarkMode.value == false
-                        ? AppStrings.goDarkMode
-                        : AppStrings.goLightMode,
+                        ? AppStrings.goDarkMode.tr()
+                        : AppStrings.goLightMode.tr(),
                     textTheme,
                     ColorState.green);
                 isDarkMode.value = !isDarkMode.value;
